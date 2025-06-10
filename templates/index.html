@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Sales Data</title>
+    <style>
+        body {  background: url('/static/sales image.webp') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0; }
+        .container { max-width: 400px; margin: 100px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
+        input[type="file"] { width: 100%; padding: 10px; margin-bottom: 15px; }
+        button { padding: 10px 20px; background-color: #28a745; border: none; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #218838; }
+        h2 { margin-bottom: 25px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📊 Sales Performance Analyzer</h2>
+        <form action="/analyze" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload & Analyze</button>
+        </form>
+    </div>
+</body>
+</html>

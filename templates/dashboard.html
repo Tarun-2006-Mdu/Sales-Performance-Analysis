@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {  background: url('/static/sales image2.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0; }
+        .container { max-width: 900px; margin: auto; }
+        .cards { display: flex; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; }
+        .card { background: white; padding: 20px; box-shadow: 0 0 8px #bbb; border-radius: 8px; flex: 1; margin: 10px; text-align: center; min-width: 250px; }
+        h2, h4, h5 { margin: 0 0 15px 0; }
+        img { max-width: 100%; border-radius: 8px; box-shadow: 0 0 10px #999; }
+        p { font-size: 24px; margin: 0; }
+        ul { padding: 0; }
+        li { font-size: 16px; text-align: left; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align:center; margin-bottom: 40px;">📈 Sales Performance Dashboard</h2>
+        <div class="cards">
+            <div class="card">
+                <h4>Total Sales</h4>
+                <p>₹ {{ '{:,.2f}'.format(total_sales) }}</p>
+            </div>
+            <div class="card">
+                <h4>Total Profit</h4>
+                <p>
+                    {% if total_profit is string %}
+                        {{ total_profit }}
+                    {% else %}
+                        ₹ {{ '{:,.2f}'.format(total_profit) }}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card">
+                <h4>Total Orders</h4>
+                <p>{{ total_orders }}</p>
+            </div>
+        </div>
+
+        <h5>Monthly Sales Trend</h5>
+        <img src="{{ sales_img }}" alt="Monthly Sales Trend" loading="lazy">
+
+        <h5 style="margin-top: 40px;">Sales by Category</h5>
+        <img src="{{ cat_img }}" alt="Sales by Category" loading="lazy">
+
+        <h5 style="margin-top: 50px;">🔍 Summary Insights</h5>
+        <div class="cards">
+            <div class="card">
+                <h4>Top 3 States by Sales</h4>
+                <ul>
+                    {% for state in top_states %}
+                        <li>{{ loop.index }}. {{ state[0] }} — ₹{{ '{:,.2f}'.format(state[1]) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Top 3 Products by Sales</h4>
+                <ul>
+                    {% for product in top_products %}
+                        <li>{{ loop.index }}. {{ product[0] }} — ₹{{ '{:,.2f}'.format(product[1]) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Average Order Value</h4>
+                <p>₹ {{ '{:,.2f}'.format(avg_order_value) }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
