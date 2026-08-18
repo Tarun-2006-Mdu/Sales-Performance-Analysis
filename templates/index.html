@@ -1,28 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Upload Sales Data</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Performance Analyzer</title>
+
     <style>
-        body {  background: url('/static/sales image.webp') no-repeat center center fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0; }
-        .container { max-width: 400px; margin: 100px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 0 10px #ccc; text-align: center; }
-        input[type="file"] { width: 100%; padding: 10px; margin-bottom: 15px; }
-        button { padding: 10px 20px; background-color: #28a745; border: none; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; }
-        button:hover { background-color: #218838; }
-        h2 { margin-bottom: 25px; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                url("/static/sales image.webp")
+                no-repeat center center fixed;
+
+            background-size: cover;
+        }
+
+        .overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .container {
+
+            width: 90%;
+
+            max-width: 480px;
+
+            padding: 40px;
+
+            background:
+                rgba(255, 255, 255, 0.94);
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.3);
+
+            backdrop-filter: blur(5px);
+        }
+
+        .icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+        }
+
+        h1 {
+
+            margin: 0 0 12px;
+
+            color: #222;
+
+            font-size: 28px;
+        }
+
+        .description {
+
+            color: #666;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 28px;
+        }
+
+        .upload-box {
+
+            border: 2px dashed #28a745;
+
+            border-radius: 12px;
+
+            padding: 25px 15px;
+
+            background: #f8fff9;
+
+            margin-bottom: 20px;
+        }
+
+        .upload-box p {
+
+            margin: 0 0 15px;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            background: white;
+
+            cursor: pointer;
+        }
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background-color: #28a745;
+
+            border: none;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+
+            background-color: #218838;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 12px
+                rgba(40, 167, 69, 0.3);
+        }
+
+        .features {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .feature {
+
+            flex: 1;
+
+            padding: 10px 5px;
+
+            background: #f5f5f5;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            color: #555;
+        }
+
+        .feature span {
+
+            display: block;
+
+            font-size: 20px;
+
+            margin-bottom: 5px;
+        }
+
+        .footer {
+
+            margin-top: 20px;
+
+            font-size: 12px;
+
+            color: #888;
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+
+                padding: 30px 20px;
+            }
+
+            h1 {
+
+                font-size: 24px;
+            }
+
+            .features {
+
+                flex-direction: column;
+            }
+
+        }
+
     </style>
+
 </head>
+
+
 <body>
+
+<div class="overlay">
+
     <div class="container">
-        <h2>📊 Sales Performance Analyzer</h2>
-        <form action="/analyze" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" required>
-            <button type="submit">Upload & Analyze</button>
+
+
+        <div class="icon">
+            📊
+        </div>
+
+
+        <h1>
+            Sales Performance Analyzer
+        </h1>
+
+
+        <div class="description">
+
+            Upload a CSV sales dataset and
+            automatically generate a detailed
+            sales performance dashboard.
+
+        </div>
+
+
+        <form
+            action="/analyze"
+            method="post"
+            enctype="multipart/form-data"
+        >
+
+
+            <div class="upload-box">
+
+                <p>
+                    📁 Select your CSV sales dataset
+                </p>
+
+
+                <input
+                    type="file"
+                    name="file"
+                    accept=".csv"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+
+                🚀 Upload & Analyze
+
+            </button>
+
+
         </form>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <span>💰</span>
+
+                Sales Analysis
+
+            </div>
+
+
+            <div class="feature">
+
+                <span>📈</span>
+
+                Trend Analysis
+
+            </div>
+
+
+            <div class="feature">
+
+                <span>📊</span>
+
+                Visual Reports
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer">
+
+            Supports CSV sales datasets
+
+        </div>
+
+
     </div>
+
+</div>
+
 </body>
+
 </html>
